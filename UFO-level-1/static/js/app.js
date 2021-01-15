@@ -27,11 +27,11 @@ let filterButton = d3.select("#filter-btn");
 // Create an event handler function
 function filterTable() {
 
-    // To get the new table data with filtered data, clear the table
-    tbody.html("");
-
     // Prevent the page from refreshing
     d3.event.preventDefault();
+
+    // To get the new table with filtered data, clear the table
+    tbody.html("");
 
     // Select the input element and get the raw HTML nodes
     let inputElement = d3.select("#datetime");
@@ -45,6 +45,7 @@ function filterTable() {
     // console.log(filteredData);
 
     filteredData.forEach( (FilteredUfoSighting) => {
+
         // Use d3 to append one table row `tr` for each filtered ufoSighting object
         let row = tbody.append("tr");
     
