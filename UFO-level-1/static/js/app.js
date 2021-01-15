@@ -4,18 +4,22 @@ var tableData = data;
 // Get a reference to the table body
 let tbody = d3.select("tbody");
 
-tableData.forEach( (ufoSighting) => {
-    // Use d3 to append one table row `tr` for each ufoSighting object
-    let row = tbody.append("tr");
+// Function to update the table displayed
+function updateTable(someData) {
+    // To get the new table, clear the table
+    tbody.html("");
 
-    // Use `Object.entries` and d3 to append 1 cell per each ufoSighting value
-    Object.entries(ufoSighting).forEach( ([key, value]) => {
-        let cell = row.append("td");
-        
-        // Use d3 to update each cell's text with ufoSighting values
-        cell.text(value);
+    someData.forEach((ufoSighting) => {
+        // Use d3 to append one table row `tr` for each ufoSighting object
+        let row = tbody.append("tr");
+        // Use `Object.entries` and d3 to append 1 cell and update value per each ufoSighting value
+        Object.entries(ufoSighting).forEach(([key, value]) => row.append("td").text(value));
     });
-});
+}
+
+// The entire table to be displayed in the fist page
+updateTable(tableData);
+
 
 // Use a date form in your HTML document and write JavaScript code 
 // that will listen for events and search through the date/time column
@@ -44,19 +48,15 @@ function filterTable() {
     // Check (console.log filteredData)
     // console.log(filteredData);
 
-    filteredData.forEach( (FilteredUfoSighting) => {
+    // Message if there is no data found for the search criteria
+    if (filteredData.length == 0) {
+        tbody.append("tr").append("td").text("No UFO Sighting Data Found for the Date Entered!").attr("colspan", "7").style("text-align", "center");
+    }
 
-        // Use d3 to append one table row `tr` for each filtered ufoSighting object
-        let row = tbody.append("tr");
-    
-        // Use `Object.entries` and d3 to append 1 cell per each ufoSighting value
-        Object.entries(FilteredUfoSighting).forEach( ([key, value]) => {
-            let cell = row.append("td");
-            
-            // Use d3 to update each cell's text with ufoSighting values
-            cell.text(value);
-        });
-    });
+    else {
+    // update the table with filtered data
+    updateTable(filteredData);
+    };
 }
 
 // Create an event handler

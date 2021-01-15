@@ -4,16 +4,29 @@ var tableData = data;
 // Get a reference to the table body
 let tbody = d3.select("tbody");
 
-let updateTable = (someData) => {
+// let updateTable = (someData) => {
+//     tbody.html("");
+
+//     someData.forEach( (ufoSighting) => {
+//         // Use d3 to append one table row `tr` for each ufoSighting object
+//         let row = tbody.append("tr");
+//         // Use `Object.entries` and d3 to append 1 cell and update value per each ufoSighting value
+//         Object.entries(ufoSighting).forEach( ([key, value]) => row.append("td").text(value) )
+//     });
+// };
+
+// Function to update the table displayed
+function updateTable(someData) {
+    // To get the new table, clear the table
     tbody.html("");
 
-    someData.forEach( (ufoSighting) => {
+    someData.forEach((ufoSighting) => {
         // Use d3 to append one table row `tr` for each ufoSighting object
         let row = tbody.append("tr");
         // Use `Object.entries` and d3 to append 1 cell and update value per each ufoSighting value
-        Object.entries(ufoSighting).forEach( ([key, value]) => row.append("td").text(value) )
+        Object.entries(ufoSighting).forEach(([key, value]) => row.append("td").text(value));
     });
-};
+}
 
 // The entire table to be displayed in the fist page
 updateTable(tableData);
@@ -83,12 +96,12 @@ function filterTable() {
         filteredData = filteredData.filter(d => d.shpae == shapeSelected);
     }
 
-    // No data message if there is no data found for the search criteria
+    // Message if there is no data found for the search criteria
     if (filteredData.length == 0) {
         tbody.append("tr").append("td").text("No UFO Sighting Data Found for the Search Criteria Entered/Selected!").attr("colspan", "7").style("text-align", "center");
     }
     else {
-        // if there is data for the search criteria, update the table
+        // If there is data for the search criteria, update the table
         updateTable(filteredData);
     }
 }
