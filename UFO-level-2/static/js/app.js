@@ -4,17 +4,23 @@ var tableData = data;
 // Get a reference to the table body
 let tbody = d3.select("tbody");
 
-// The entire table to be displayed in the fist page
-tableData.forEach( (ufoSighting) => {
-    // Use d3 to append one table row `tr` for each ufoSighting object
-    let row = tbody.append("tr");
-    // Use `Object.entries` and d3 to append 1 cell per each ufoSighting value
-    Object.entries(ufoSighting).forEach( ([key, value]) => {
-        let cell = row.append("td");        
-        // Use d3 to update each cell's text with ufoSighting values
-        cell.text(value);
+let updateTable = (someData) => {
+    tbody.html("");
+
+    someData.forEach( (ufoSighting) => {
+        // Use d3 to append one table row `tr` for each ufoSighting object
+        let row = tbody.append("tr");
+        // Use `Object.entries` and d3 to append 1 cell and update value per each ufoSighting value
+        Object.entries(ufoSighting).forEach( ([key, value]) => row.append("td").text(value) )
     });
-});
+};
+
+// The entire table to be displayed in the fist page
+updateTable(tableData);
+
+// Multiple Search Categories
+// Using multiple input tags and/or select dropdowns, write JavaScript code so the user can to set multiple filters 
+// and search for UFO sightings using the following criteria based on the table columns: date/time, city, state, country, shape
 
 // Populate dropdowns selections
 
@@ -32,14 +38,6 @@ states.forEach( state => selectState.append("option").text(state) );
 countries.forEach( country => selectCountry.append("option").text(country) );
 shapes.forEach( shape => selectShape.append("option").text(shape) );
 
-
-
-console.log(states);
-
-// Use a date form in your HTML document and write JavaScript code 
-// that will listen for events and search through the date/time column
-// to find rows that match user input.
-
 // Select the button
 let filterButton = d3.select("#filter-btn");
 
@@ -53,29 +51,46 @@ function filterTable() {
     tbody.html("");
 
     // Select the input element and get the raw HTML nodes
-    let inputElement = d3.select("#datetime");
-    
-    // Get the value property of the input element
-    let inputValue = inputElement.property("value");
+    // Get the value property of the input elements and the selected dropdown elemments
+    let dateInput = d3.select("#datetime").property("value");
+    let cityInput = d3.select("#cityinput").property("value");
+    let stateSelected = selectState.property("value");
+    let countrySelected = selectCountry.property("value");
+    let shapeSelected = selectShape.property("value");
 
-    let filteredData = tableData.filter(ufoSighting => ufoSighting.datetime === inputValue);
 
-    // Check (console.log filteredData)
-    // console.log(filteredData);
+    // Filter Data
 
-    filteredData.forEach( (FilteredUfoSighting) => {
+    let filteredData = tableData;
 
-        // Use d3 to append one table row `tr` for each filtered ufoSighting object
-        let row = tbody.append("tr");
-    
-        // Use `Object.entries` and d3 to append 1 cell per each ufoSighting value
-        Object.entries(FilteredUfoSighting).forEach( ([key, value]) => {
-            let cell = row.append("td");
-            
-            // Use d3 to update each cell's text with ufoSighting values
-            cell.text(value);
-        });
-    });
+    if (dateInput != "") {
+        filteredData = filteredData.filter(d => d.datetime == dateInput);
+    }
+
+    if (cityInput != "") {
+        filteredData = filteredData.filter(d => d.city == cityInput);
+    }
+
+    if (stateSelected != "") {
+        filteredData = filteredData.filter(d => d.state == stateSelected);
+    }
+
+    if (countrySelected != "") {
+        filteredData = filteredData.filter(d => d.country == countrySelected);
+    }
+
+    if (shapeSelected != "") {
+        filteredData = filteredData.filter(d => d.shpae == shapeSelected);
+    }
+
+    // No data message if there is no data found for the search criteria
+    if (filteredData.length == 0) {
+        tbody.append("tr").append("td").text("No UFO Sighting Data Found for the Search Criteria Entered/Selected!").attr("colspan", "7").style("text-align", "center");
+    }
+    else {
+        // if there is data for the search criteria, update the table
+        updateTable(filteredData);
+    }
 }
 
 // Create an event handler

@@ -1,10 +1,6 @@
 // Assign the data from `data.js` to a descriptive variable
 var tableData = data;
 
-// List of cities
-let cities = tableData.map(ufoSighting => ufoSighting.city);
-console.log(cities);
-
 // Get a reference to the table body
 let tbody = d3.select("tbody");
 
