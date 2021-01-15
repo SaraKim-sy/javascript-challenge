@@ -4,7 +4,7 @@ var tableData = data;
 // Get a reference to the table body
 let tbody = d3.select("tbody");
 
-tableData.forEach((ufoSighting) => {
+tableData.forEach( (ufoSighting) => {
     // Use d3 to append one table row `tr` for each ufoSighting object
     let row = tbody.append("tr");
 
@@ -26,7 +26,10 @@ let filterButton = d3.select("#filter-btn");
 
 // Create an event handler function
 function filterTable() {
-    
+
+    // To get the new table data with filtered data, clear the table
+    tbody.html("");
+
     // Prevent the page from refreshing
     d3.event.preventDefault();
 
@@ -38,9 +41,21 @@ function filterTable() {
 
     let filteredData = tableData.filter(ufoSighting => ufoSighting.datetime === inputValue);
 
-    // check (console.log filteredData)
+    // Check (console.log filteredData)
     // console.log(filteredData);
 
+    filteredData.forEach( (FilteredUfoSighting) => {
+        // Use d3 to append one table row `tr` for each filtered ufoSighting object
+        let row = tbody.append("tr");
+    
+        // Use `Object.entries` and d3 to append 1 cell per each ufoSighting value
+        Object.entries(FilteredUfoSighting).forEach( ([key, value]) => {
+            let cell = row.append("td");
+            
+            // Use d3 to update each cell's text with ufoSighting values
+            cell.text(value);
+        });
+    });
 }
 
 filterButton.on("click", filterTable);
