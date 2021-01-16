@@ -1,6 +1,6 @@
 # JavaScript and DOM Manipulation
 
-Find the completed UFO Sightings website here: [UFO Sightings](https://sarakim-sy.github.io/javascript-challenge)
+Find the completed UFO Sightings website here: [UFO Sightings](https://sarakim-sy.github.io/javascript-challenge/)
 
 ## Background
 
