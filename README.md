@@ -4,11 +4,7 @@ Find the completed UFO Sightings website here: [UFO Sightings](https://sarakim-s
 
 ## Background
 
-WAKE UP SHEEPLE! The extra-terrestrial menace has come to Earth and we here at `ALIENS-R-REAL` have collected all of the eye-witness reports we could to prove it! All we need to do now is put this information online for the world to see and then the matter will finally be put to rest.
-
-There is just one tiny problem though... our collection is too large to search through manually. Even our most dedicated followers are complaining that they are having trouble locating specific reports in this mess.
-
-This project is to write code that will create a table dynamically based upon a [dataset](UFO-level-1/static/js/data.js). It will also allow the users to filter the table data for specific values using JavaScript, HTML, and CSS, and D3.js on our web pages.
+This project is to write code that will create a table dynamically based upon a [dataset](UFO-level-1/static/js/data.js). It will also allow the users to filter the table data for specific values using JavaScript, HTML, and CSS, and D3.js on the web pages.
 
 
 ### Level 1: Automatic Table and Date Search
@@ -23,6 +19,8 @@ This project is to write code that will create a table dynamically based upon a 
 
 * Used a date form in the HTML document and wrote JavaScript code that listens for events and searches through the `date/time` column to find rows that match user input.
 
+* 'No Data Found' message will appear when there is no data found for the search criteria
+
 ### Level 2: Multiple Search Categories
 
 * You can find it in the UFO-level-2 folder.
@@ -34,9 +32,18 @@ This project is to write code that will create a table dynamically based upon a 
   3. `state`
   4. `country`
   5. `shape`
+  
+ * 'No Data Found' message will appear when there is no data found for the search criteria
 
 - - -
 
 ### Dataset
 
 * [UFO Sightings Data](static/js/data.js)
+
+
+### Technologies
+This project was created with:
+* JavaScript
+* HTML/CSS
+* D3.js
